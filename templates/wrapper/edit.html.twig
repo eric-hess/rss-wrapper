@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('wrapper/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ include('wrapper/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_wrapper_index') }}">back to list</a>
+{% endblock %}

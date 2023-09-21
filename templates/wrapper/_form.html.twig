@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary" onclick="addManipulator()">Add a manipulator</button>
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+<script>
+    const addManipulator = () => {
+        const collectionHolder = document.querySelector('#wrapper_manipulators');
+        collectionHolder.innerHTML += collectionHolder.dataset.prototype.replace(
+            /__name__/g,
+            manipulatorsLength
+        );
+        manipulatorsLength++;
+        addManipulatorRemoveButton();
+    };
+
+    const addManipulatorRemoveButton = () => {
+        document
+            .querySelectorAll('#wrapper_manipulators > .row > div > div')
+            .forEach((entry, index) => {
+                if (entry.getAttribute('data-index') !== null) {
+                    return;
+                }
+
+                entry.setAttribute('data-index', index);
+                const deleteButton = document.createElement('button')
+                deleteButton.innerText = 'Delete';
+                deleteButton.className = 'btn btn-primary';
+                deleteButton.onclick = () => entry.parentNode.parentNode.remove();
+
+                entry.appendChild(deleteButton);
+            });
+    };
+
+    let manipulatorsLength = {{ form.manipulators|length }};
+
+    addManipulatorRemoveButton();
+</script>
