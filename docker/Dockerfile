@@ -17,6 +17,7 @@ FROM alpine:3.18
 
 RUN apk upgrade --no-cache
 RUN apk add --no-cache \
+    bash \
     caddy \
     php82 \
     php82-ctype \
