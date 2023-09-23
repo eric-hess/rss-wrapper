@@ -2,18 +2,25 @@
 
 {% block body %}
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-
+    {% if resendVerificationEmailForm %}
+        {{ form_start(resendVerificationEmailForm) }}
+        {{ form_widget(resendVerificationEmailForm) }}
+        <button type="submit" class="btn btn-primary">resend verification email</button>
+        {{ form_end(resendVerificationEmailForm) }}
+    {% endif %}
     <form action="{{ path('app_login') }}" method="post">
+
         <div class="form-outline mb-4">
-            <input type="email" id="email" class="form-control" name="_username" />
-            <label class="form-label" for="email">Email address</label>
+            <label class="form-label" for="email">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="email" class="form-control" autocomplete="email" required autofocus>
         </div>
         <div class="form-outline mb-4">
-            <input type="password" id="password" class="form-control" name="_password" />
             <label class="form-label" for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" required>
         </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <button type="submit" class="btn btn-primary btn-block mb-4">login</button>
     </form>
 {% endblock %}

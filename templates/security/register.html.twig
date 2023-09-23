@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for flash_error in app.flashes('verification_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Register') }}</button>
+    <button class="btn btn-primary">register</button>
     {{ form_end(form) }}
 {% endblock %}

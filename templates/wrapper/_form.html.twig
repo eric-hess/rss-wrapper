@@ -1,7 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-primary" onclick="addManipulator()">Add a manipulator</button>
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary" onclick="addManipulator()">add manipulator</button>
+    <button class="btn btn-primary">save</button>
 {{ form_end(form) }}
 
 <script>
@@ -25,7 +25,7 @@
 
                 entry.setAttribute('data-index', index);
                 const deleteButton = document.createElement('button')
-                deleteButton.innerText = 'Delete';
+                deleteButton.innerText = 'delete';
                 deleteButton.className = 'btn btn-primary';
                 deleteButton.onclick = () => entry.parentNode.parentNode.remove();
 

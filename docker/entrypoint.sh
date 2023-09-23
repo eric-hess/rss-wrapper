@@ -23,7 +23,9 @@ function getValue(){
 echo "APP_ENV=$(getValue APP_ENV prod)" > $ENV_FILENAME
 echo "APP_SECRET=$(getValue APP_SECRET 'change-me')" >> $ENV_FILENAME
 echo "DATABASE_URL=$(getValue DATABASE_URL 'sqlite:///%kernel.project_dir%/var/database/data.db')" >> $ENV_FILENAME
-echo "APP_ENABLE_REGISTRATION=$(getValue APP_ENABLE_REGISTRATION true)" >> $ENV_FILENAME
+echo "MAILER_DSN=$(getValue MAILER_DSN 'smtp://user:pass@smtp.example.com:25')" >> $ENV_FILENAME
+echo "APP_REGISTRATION_ENABLED=$(getValue APP_REGISTRATION_ENABLED true)" >> $ENV_FILENAME
+echo "APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED=$(getValue APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED false)" >> $ENV_FILENAME
 
 php82 /opt/app/bin/console doctrine:migrations:migrate --no-interaction
 

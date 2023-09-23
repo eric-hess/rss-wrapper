@@ -34,17 +34,19 @@ services:
           - ./database:/opt/app/var/database
         environment:
           - APP_SECRET=change-me
-          - APP_ENABLE_REGISTRATION=false
+          - APP_REGISTRATION_ENABLED=false
         ports:
             - 8080:8080
 ```
 ## Available env variables
 
-| variable name             | default value                                         | description                                                                                                                                                                                                                                                                            |
-|---------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `APP_SECRET`              | `change-me`                                           | Secret key used to enhance the security of the application. It is used for tasks such as session security, CSRF protection, and data encryption                                                                                                                                        |
-| `DATABASE_URL`            | `sqlite:///%kernel.project_dir%/var/database/data.db` | The database connection string. Default a sqlite database is used                                                                                                                                                                                                                      |
-| `APP_ENABLE_REGISTRATION` | `true`                                                | Determines if new user should have the ability to create a account in order to create wrapper. If the registration is disabled new user accounts can be created with a cli command in the container `php82 /opt/app/bin/console app:create-user --email=<email> --password=<password>` |
+| variable name                                 | default value                                         | description                                                                                                                                                                                                                                                                            |
+|-----------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `APP_SECRET`                                  | `change-me`                                           | Secret key used to enhance the security of the application. It is used for tasks such as session security, CSRF protection, and data encryption                                                                                                                                        |
+| `DATABASE_URL`                                | `sqlite:///%kernel.project_dir%/var/database/data.db` | The database connection string. Default a sqlite database is used                                                                                                                                                                                                                      |
+| `MAILER_DSN`                                  | `smtp://user:pass@smtp.example.com:25`                | Needed to send emails when setting `APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED` to `true` (enabled email verification) see https://symfony.com/doc/current/mailer.html#using-built-in-transports                                                                                      |
+| `APP_REGISTRATION_ENABLED`                    | `true`                                                | Determines if new user should have the ability to create a account in order to create wrapper. If the registration is disabled new user accounts can be created with a cli command in the container `php82 /opt/app/bin/console app:create-user --email=<email> --password=<password>` |
+| `APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED` | `false`                                               | Determines if the needs to verify the used email in order to login                                                                                                                                                                                                                     |
 
 ## Screenshots
 

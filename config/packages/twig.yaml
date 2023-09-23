@@ -2,7 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_5_horizontal_layout.html.twig']
     globals:
-        APP_ENABLE_REGISTRATION: '%env(bool:APP_ENABLE_REGISTRATION)%'
+        APP_REGISTRATION_ENABLED: '%app.registration.enabled%'
 
 when@test:
     twig:
