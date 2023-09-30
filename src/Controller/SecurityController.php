@@ -72,7 +72,7 @@ class SecurityController extends AbstractController
             $entityManager->flush();
 
             if ($this->getParameter('app.registration.email_verification.enabled')) {
-                $this->sendVerificationEmail($emailVerifier, $user);
+                $emailVerifier->sendVerificationEmail($user);
 
                 $this->addFlash('success', 'email verification was send');
 
@@ -105,7 +105,7 @@ class SecurityController extends AbstractController
             $user = $userRepository->findOneBy(['email' => $form->get('email')->getData()]);
 
             if ($user) {
-                $this->sendVerificationEmail($emailVerifier, $user);
+                $emailVerifier->sendVerificationEmail($user);
             }
 
             $this->addFlash('success', 'email verification was send');
@@ -149,17 +149,6 @@ class SecurityController extends AbstractController
                 $user,
                 $authenticator,
                 $request
-        );
-    }
-
-    private function sendVerificationEmail(EmailVerifier $emailVerifier, User $user): void
-    {
-        $emailVerifier->sendEmailConfirmation('app_verification_email', $user,
-            (new TemplatedEmail())
-                ->from(new Address('rss-wrapper@e-hess.com', 'rss-wrapper@e-hess.com'))
-                ->to($user->getEmail())
-                ->subject('Please Confirm your Email')
-                ->htmlTemplate('security/confirmation_email.html.twig')
         );
     }
 }

@@ -47,6 +47,15 @@ services:
 | `MAILER_DSN`                                  | `smtp://user:pass@smtp.example.com:25`                | Needed to send emails when setting `APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED` to `true` (enabled email verification) see https://symfony.com/doc/current/mailer.html#using-built-in-transports                                                                                      |
 | `APP_REGISTRATION_ENABLED`                    | `true`                                                | Determines if new user should have the ability to create a account in order to create wrapper. If the registration is disabled new user accounts can be created with a cli command in the container `php82 /opt/app/bin/console app:create-user --email=<email> --password=<password>` |
 | `APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED` | `false`                                               | Determines if the needs to verify the used email in order to login                                                                                                                                                                                                                     |
+| `APP_EMAIL_SENDER_ADDRESS`                    | `rss-wrapper@example.com`                             | The sender address where emails should send from if email communication is enabled.                                                                                                                                                                                                    |
+| `APP_EMAIL_SENDER_ADDRESS_NAME`               | `rss-wrapper@example.coc`                             | The display name that should be used for emails if email communication is enabled.                                                                                                                                                                                                     |
+
+
+## Available user roles
+| role name    | description                                                              |
+|--------------|--------------------------------------------------------------------------|
+| `ROLE_USER`  | default role, needed to use the application                              |
+| `ROLE_ADMIN` | user with that role can manage other users and other users wrappers etc. |
 
 ## Screenshots
 

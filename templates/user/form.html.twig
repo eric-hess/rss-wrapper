@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    {% if form.roles|default(false) %}
+        <button class="btn btn-primary" onclick="addRole()">add role</button>
+    {% endif %}
+    <button class="btn btn-primary">{{ submit_button_label }}</button>
+{{ form_end(form) }}
+
+{% if form.roles|default(false) %}
+    <script>
+        const addRole = () => {
+            const collectionHolder = document.querySelector('#user_roles');
+            collectionHolder.innerHTML += collectionHolder.dataset.prototype.replace(
+                /__name__/g,
+                rolesLength
+            );
+            rolesLength++;
+            addRoleRemoveButton();
+        };
+
+        const addRoleRemoveButton = () => {
+            document
+                .querySelectorAll('#user_roles > .row > div:nth-child(2)')
+                .forEach((entry, index) => {
+                    if (entry.getAttribute('data-index') !== null) {
+                        return;
+                    }
+
+                    entry.setAttribute('data-index', index);
+                    const deleteButton = document.createElement('button')
+                    deleteButton.innerText = 'delete';
+                    deleteButton.className = 'btn btn-primary';
+                    deleteButton.onclick = () => entry.parentNode.remove();
+
+                    entry.appendChild(deleteButton);
+                });
+        };
+
+        let rolesLength = {{ form.roles|length }};
+
+        addRoleRemoveButton();
+    </script>
+{% endif %}

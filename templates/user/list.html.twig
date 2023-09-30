@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('user/table.html.twig', {'users': users}) }}
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_user_create') }}">create</a>
+    {% endif %}
+{% endblock %}

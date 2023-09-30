@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('user/form.html.twig', {'submit_button_label': 'create'}) }}
+
+    <a href="{{ path('app_user_list') }}">back to list</a>
+{% endblock %}

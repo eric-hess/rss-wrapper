@@ -26,6 +26,8 @@ echo "DATABASE_URL=$(getValue DATABASE_URL 'sqlite:///%kernel.project_dir%/var/d
 echo "MAILER_DSN=$(getValue MAILER_DSN 'smtp://user:pass@smtp.example.com:25')" >> $ENV_FILENAME
 echo "APP_REGISTRATION_ENABLED=$(getValue APP_REGISTRATION_ENABLED true)" >> $ENV_FILENAME
 echo "APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED=$(getValue APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED false)" >> $ENV_FILENAME
+echo "APP_EMAIL_SENDER_ADDRESS=$(getValue APP_EMAIL_SENDER_ADDRESS 'rss-wrapper@example.com')" >> $ENV_FILENAME
+echo "APP_EMAIL_SENDER_ADDRESS_NAME=$(getValue APP_EMAIL_SENDER_ADDRESS_NAME 'rss-wrapper@example.com')" >> $ENV_FILENAME
 
 php82 /opt/app/bin/console doctrine:migrations:migrate --no-interaction
 

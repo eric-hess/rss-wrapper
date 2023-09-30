@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('user/table.html.twig', {'users': [user]}) }}
+    {{ include('wrapper/table.html.twig', {'wrappers': user.wrappers}) }}
+{% endblock %}

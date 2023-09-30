@@ -6,6 +6,8 @@
 parameters:
     app.registration.enabled: '%env(bool:APP_REGISTRATION_ENABLED)%'
     app.registration.email_verification.enabled: '%env(bool:APP_REGISTRATION_EMAIL_VERIFICATION_ENABLED)%'
+    app.email.sender_address: '%env(string:APP_EMAIL_SENDER_ADDRESS)%'
+    app.email.sender_address_name: '%env(string:APP_EMAIL_SENDER_ADDRESS_NAME)%'
 
 services:
     # default configuration for services in *this* file

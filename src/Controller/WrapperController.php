@@ -10,9 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\LockedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[Route('/wrapper')]
 class WrapperController extends AbstractController
@@ -59,7 +59,7 @@ class WrapperController extends AbstractController
     public function edit(Request $request, Wrapper $wrapper, EntityManagerInterface $entityManager): Response
     {
         if ($wrapper->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
-            throw new  NotFoundHttpException();
+            throw new LockedHttpException();
         }
 
         $form = $this->createForm(WrapperType::class, $wrapper);
@@ -77,14 +77,14 @@ class WrapperController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_wrapper_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_wrapper_delete', methods: ['GET'])]
     public function delete(Request $request, Wrapper $wrapper, EntityManagerInterface $entityManager): Response
     {
         if ($wrapper->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
-            throw new  NotFoundHttpException();
+            throw new NotFoundHttpException();
         }
 
-        if ($this->isCsrfTokenValid('delete'.$wrapper->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$wrapper->getId(), $request->get('token'))) {
             $entityManager->remove($wrapper);
             $entityManager->flush();
         }

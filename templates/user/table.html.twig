@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>email</th>
+        <th>roles</th>
+        <th>is verified</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.roles|join(', ') }}</td>
+            <td>{{ user.isVerified }}</td>
+            <td>
+                <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                <a href="{{ path('app_user_delete', {'id': user.id, 'token': csrf_token('delete' ~ user.id)}) }}">delete</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

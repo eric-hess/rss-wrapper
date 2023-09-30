@@ -1,31 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>feed</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for wrapper in wrappers %}
-            <tr>
-                <td>{{ wrapper.id }}</td>
-                <td>{{ wrapper.feed }}</td>
-                <td>
-                    <a href="{{ path('app_wrapper_show', {'id': wrapper.id}) }}">show</a>
-                    <a href="{{ path('app_wrapper_edit', {'id': wrapper.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {{ include('wrapper/table.html.twig', {'wrappers': wrappers}) }}
 
     <a href="{{ path('app_wrapper_new') }}">create new</a>
 {% endblock %}
